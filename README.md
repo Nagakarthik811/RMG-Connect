@@ -5,7 +5,7 @@ A small full-stack demo for managing TCS associates who are currently unallocate
 ## Requirements
 
 - Python 3.10 or newer
-- Node.js 18 or newer and npm
+- Node.js 18 or newer & npm
 
 ## Run the Django backend
 
