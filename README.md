@@ -1,11 +1,22 @@
 # RMG Connect
 
-A small full-stack demo for managing TCS associates who are currently unallocated. React communicates with a Django REST API, and Django stores all application records in SQLite.
+A small full-stack demo for managing TCS associates who are currently unallocated. React communicates with a Django REST API. Local development uses SQLite; the Render deployment uses PostgreSQL.
 
 ## Requirements
 
 - Python 3.10 or newer
 - Node.js 18 or newer & npm
+
+## Deploy on Render
+
+1. Push this repository to GitHub and connect it to Render.
+2. In Render, choose **New > Blueprint**, select the repository, and apply the `render.yaml` blueprint. It creates the web service and its PostgreSQL database in Singapore.
+3. In the service's Environment settings, add `DJANGO_SUPERUSER_USERNAME`, `DJANGO_SUPERUSER_EMAIL`, and a strong `DJANGO_SUPERUSER_PASSWORD`. Save the values and redeploy; startup creates the first admin account automatically.
+4. After the deploy succeeds, remove those three environment variables and save. The admin account remains in the database.
+
+The Docker image builds the Vite frontend, serves it and the Django API from the same origin, and runs database migrations when the service starts. The included free PostgreSQL database is temporary: Render deletes free databases after 30 days. Upgrade the database to a paid plan before relying on it for persistent application data. The free web service may sleep when idle.
+
+Do not run `python manage.py seed_demo` on a public deployment: it creates accounts with known demo passwords. Use `createsuperuser` to create a private administrator account instead.
 
 ## Run the Django backend
 

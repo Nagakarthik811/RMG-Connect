@@ -1,0 +1,25 @@
+databases:
+  - name: rmg-connect-db
+    databaseName: rmg_connect
+    user: rmg_connect
+    plan: free
+    region: singapore
+
+services:
+  - type: web
+    name: rmg-connect
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: rmg-connect-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "false"

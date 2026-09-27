@@ -4,3 +4,4 @@ django-cors-headers==4.4.0
 gunicorn
 psycopg[binary]
 dj-database-url
+whitenoise
