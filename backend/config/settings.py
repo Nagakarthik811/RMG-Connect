@@ -140,13 +140,8 @@ raw_hosts = os.environ.get('ALLOWED_HOSTS', '')
 if raw_hosts:
     ALLOWED_HOSTS = [host.strip() for host in raw_hosts.split(',') if host.strip()]
 else:
-    ALLOWED_HOSTS = [
-        'localhost',
-        '127.0.0.1',
-        '[::1]',
-        '.railway.app',  # Matches your Railway domain (e.g., rmg-connect-production.up.railway.app)
-        '*',             # Allows Railway's internal health check pings without DisallowedHost 400 errors
-    ]
+    ALLOWED_HOSTS = ['*']
+    
 
     # Include platform-injected hostnames if available
     railway_public_domain = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
